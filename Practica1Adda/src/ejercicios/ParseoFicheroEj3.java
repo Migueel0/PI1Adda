@@ -3,12 +3,13 @@ package ejercicios;
 import java.util.List;
 import java.util.function.Function;
 
+import us.lsi.common.List2;
 import us.lsi.geometria.Punto2D;
 import us.lsi.streams.Stream2;
 
 public record ParseoFicheroEj3(String fichero) {
 	
-public static List<LineaFichero> listaDeFichero(String fichero){
+public static List<Punto2D> listaDeFichero(String fichero){
 		
 		Function<String,LineaFichero> parseLineaFichero = s -> {
 			String [] s2 = s.split(",");
@@ -19,7 +20,14 @@ public static List<LineaFichero> listaDeFichero(String fichero){
 			.map(parseLineaFichero)
 			.toList();
 	 
-	 return listaLineaFichero;
+	 Integer i = 0;
+	 List<Punto2D> listaPuntos = List2.empty();
+	 while(i<listaLineaFichero.size()) {
+		 listaPuntos.add(listaLineaFichero.get(i).puntosLineaFichero());
+		 i = i+1;
+	 }
+	 
+	 return listaPuntos;
 	
 	}
 
